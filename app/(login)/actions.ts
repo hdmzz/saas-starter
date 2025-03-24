@@ -58,6 +58,7 @@ export const signIn = validatedAction(signInSchema, async (data, formData) => {
     };
   }
 
+  
   const { user: foundUser } = user[0];
 
   const isPasswordValid = await comparePasswords(

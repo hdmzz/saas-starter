@@ -15,7 +15,6 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useUser } from '@/lib/auth';
 import { signOut } from '@/app/(login)/actions';
 import { useRouter } from 'next/navigation';
-import { useTokensStore } from '@/lib/stores/tokens';
 
 function UserMenuContent() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
