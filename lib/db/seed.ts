@@ -1,6 +1,6 @@
 import { stripe } from '../payments/stripe';
 import { db } from './drizzle';
-import { users, teams, teamMembers } from './schema';
+import { users } from './schema';
 import { hashPassword } from '@/lib/auth/session';
 
 async function createStripeProducts() {
@@ -14,7 +14,7 @@ async function createStripeProducts() {
   await stripe.prices.create({
     product: baseProduct.id,
     unit_amount: 800, // $8 in cents
-    currency: 'usd',
+    currency: 'eur',
     recurring: {
       interval: 'month',
       trial_period_days: 7,
@@ -51,24 +51,16 @@ async function seed() {
         email: email,
         passwordHash: passwordHash,
         role: "owner",
+        tokens: 0,
+        stripeCustomerId: "",
+        stripeSubscriptionId: "",
+        stripeProductId: "",
+        planName: "",
       },
     ])
     .returning();
 
   console.log('Initial user created.');
-
-  const [team] = await db
-    .insert(teams)
-    .values({
-      name: 'Test Team',
-    })
-    .returning();
-
-  await db.insert(teamMembers).values({
-    teamId: team.id,
-    userId: user.id,
-    role: 'owner',
-  });
 
   await createStripeProducts();
 }

@@ -21,50 +21,38 @@ const iconMap: Record<ActivityType, LucideIcon> = {
   [ActivityType.UPDATE_PASSWORD]: Lock,
   [ActivityType.DELETE_ACCOUNT]: UserMinus,
   [ActivityType.UPDATE_ACCOUNT]: Settings,
-  [ActivityType.CREATE_TEAM]: UserPlus,
-  [ActivityType.REMOVE_TEAM_MEMBER]: UserMinus,
-  [ActivityType.INVITE_TEAM_MEMBER]: Mail,
-  [ActivityType.ACCEPT_INVITATION]: CheckCircle,
 };
 
 function getRelativeTime(date: Date) {
   const now = new Date();
   const diffInSeconds = Math.floor((now.getTime() - date.getTime()) / 1000);
 
-  if (diffInSeconds < 60) return 'just now';
+  if (diffInSeconds < 60) return 'Maintenant';
   if (diffInSeconds < 3600)
-    return `${Math.floor(diffInSeconds / 60)} minutes ago`;
+    return `Il y a ${Math.floor(diffInSeconds / 60)} minutes`;
   if (diffInSeconds < 86400)
-    return `${Math.floor(diffInSeconds / 3600)} hours ago`;
+    return `Il y a ${Math.floor(diffInSeconds / 3600)} heures`;
   if (diffInSeconds < 604800)
-    return `${Math.floor(diffInSeconds / 86400)} days ago`;
+    return `Il y a ${Math.floor(diffInSeconds / 86400)} jours`;
   return date.toLocaleDateString();
 }
 
 function formatAction(action: ActivityType): string {
   switch (action) {
     case ActivityType.SIGN_UP:
-      return 'You signed up';
+      return 'Vous vous êtes inscrit';
     case ActivityType.SIGN_IN:
-      return 'You signed in';
+      return 'Vous vous êtes connecté';
     case ActivityType.SIGN_OUT:
-      return 'You signed out';
+      return 'Vous vous êtes déconnecté';
     case ActivityType.UPDATE_PASSWORD:
-      return 'You changed your password';
+      return 'Vous avez mis à jour votre mot de passe';
     case ActivityType.DELETE_ACCOUNT:
-      return 'You deleted your account';
+      return 'Vous avez supprimé votre compte';
     case ActivityType.UPDATE_ACCOUNT:
-      return 'You updated your account';
-    case ActivityType.CREATE_TEAM:
-      return 'You created a new team';
-    case ActivityType.REMOVE_TEAM_MEMBER:
-      return 'You removed a team member';
-    case ActivityType.INVITE_TEAM_MEMBER:
-      return 'You invited a team member';
-    case ActivityType.ACCEPT_INVITATION:
-      return 'You accepted an invitation';
+      return 'Vous avez mis à jour votre compte';
     default:
-      return 'Unknown action occurred';
+      return 'Action inconnue';
   }
 }
 
@@ -74,11 +62,11 @@ export default async function ActivityPage() {
   return (
     <section className="flex-1 p-4 lg:p-8">
       <h1 className="text-lg lg:text-2xl font-medium text-gray-900 mb-6">
-        Activity Log
+        Activitées récente
       </h1>
       <Card>
         <CardHeader>
-          <CardTitle>Recent Activity</CardTitle>
+          <CardTitle>Actions récentes</CardTitle>
         </CardHeader>
         <CardContent>
           {logs.length > 0 ? (
@@ -111,11 +99,10 @@ export default async function ActivityPage() {
             <div className="flex flex-col items-center justify-center text-center py-12">
               <AlertCircle className="h-12 w-12 text-orange-500 mb-4" />
               <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                No activity yet
+                Pas d'activité récente
               </h3>
               <p className="text-sm text-gray-500 max-w-sm">
-                When you perform actions like signing in or updating your
-                account, they'll appear here.
+                Quand vous effectuez des actions, elles apparaîtront ici.
               </p>
             </div>
           )}

@@ -39,21 +39,21 @@ export default function GeneralPage() {
   return (
     <section className="flex-1 p-4 lg:p-8">
       <h1 className="text-lg lg:text-2xl font-medium text-gray-900 mb-6">
-        General Settings
+        Paramètres du compte
       </h1>
 
       <Card>
         <CardHeader>
-          <CardTitle>Account Information</CardTitle>
+          <CardTitle>Informations</CardTitle>
         </CardHeader>
         <CardContent>
           <form className="space-y-4" onSubmit={handleSubmit}>
             <div>
-              <Label htmlFor="name">Name</Label>
+              <Label htmlFor="name">Nom</Label>
               <Input
                 id="name"
                 name="name"
-                placeholder="Enter your name"
+                placeholder="Entrez votre nom"
                 defaultValue={user?.name || ''}
                 required
               />
@@ -83,10 +83,10 @@ export default function GeneralPage() {
               {isPending ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Saving...
+                  Enregistrement...
                 </>
               ) : (
-                'Save Changes'
+                'Enregistrer'
               )}
             </Button>
           </form>

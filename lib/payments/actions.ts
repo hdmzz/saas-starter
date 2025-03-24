@@ -1,15 +1,23 @@
 'use server';
 
 import { redirect } from 'next/navigation';
-import { createCheckoutSession, createCustomerPortalSession } from './stripe';
-import { withTeam } from '@/lib/auth/middleware';
+import { createCheckoutSession, createCustomerPortalSession, createOneTimeCheckoutSession } from './stripe';
+import { withUser } from '@/lib/auth/middleware';
 
-export const checkoutAction = withTeam(async (formData, team) => {
+export const checkoutAction = withUser(async (formData, user) => {
   const priceId = formData.get('priceId') as string;
-  await createCheckoutSession({ team: team, priceId });
+
+  console.log(formData);
+  
+  const paymentType = formData.get('paymentType') as "subscription" | "one-time";
+
+  if (paymentType === "subscription")
+    await createCheckoutSession({ user, priceId });
+  else if (paymentType === "one-time")
+    await createOneTimeCheckoutSession({ user, priceId });
 });
 
-export const customerPortalAction = withTeam(async (_, team) => {
-  const portalSession = await createCustomerPortalSession(team);
+export const customerPortalAction = withUser(async (_, user) => {
+  const portalSession = await createCustomerPortalSession(user);
   redirect(portalSession.url);
 });

@@ -38,6 +38,7 @@ Use the included setup script to create your `.env` file:
 
 ```bash
 pnpm db:setup
+i chose to run stripeon docker 
 ```
 
 Then, run the database migrations and seed the database with a default user and team:
@@ -84,7 +85,7 @@ When you're ready to deploy your SaaS application to production, follow these st
 
 1. Go to the Stripe Dashboard and create a new webhook for your production environment.
 2. Set the endpoint URL to your production API route (e.g., `https://yourdomain.com/api/stripe/webhook`).
-3. Select the events you want to listen for (e.g., `checkout.session.completed`, `customer.subscription.updated`).
+3. Select the events you  to wantlisten for (e.g., `checkout.session.completed`, `customer.subscription.updated`).
 
 ### Deploy to Vercel
 
