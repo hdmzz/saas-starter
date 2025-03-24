@@ -13,7 +13,6 @@ export async function generateDescription(formData: FormData) {
     redirect('/sign-in');
   }
 
-  // Vérifier si l'utilisateur a des tokens
   if (!user.tokens || user.tokens <= 0) {
     return {
       error: "Vous n'avez plus de tokens disponibles. Veuillez recharger votre compte."

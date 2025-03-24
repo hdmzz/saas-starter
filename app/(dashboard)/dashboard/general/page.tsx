@@ -15,8 +15,7 @@ type ActionState = {
 };
 
 export default function GeneralPage() {
-  const { userPromise } = useUser();
-  const user = use(userPromise);
+  const { user } = useUser();
   const [state, formAction, isPending] = useActionState<ActionState, FormData>(
     updateAccount,
     { error: '', success: '' }
