@@ -18,7 +18,7 @@ import { useRouter } from 'next/navigation';
 
 function UserMenuContent() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { user } = useUser();
+  const { user, refreshUser } = useUser();
   let tokens = user?.tokens;
   const router = useRouter();
 
@@ -28,6 +28,7 @@ function UserMenuContent() {
 
   async function handleSignOut() {
     await signOut();
+    refreshUser();
     router.refresh();
     router.push('/');
   }

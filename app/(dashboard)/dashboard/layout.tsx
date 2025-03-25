@@ -1,10 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Users, Settings, Shield, Activity, Menu, ClipboardPenLine } from 'lucide-react';
+import { useUser } from '@/lib/auth';
 
 export default function DashboardLayout({
   children,
@@ -13,6 +14,7 @@ export default function DashboardLayout({
 }) {
   const pathname = usePathname();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const {refreshUser} = useUser();
 
   const navItems = [
     { href: '/dashboard', icon: Users, label: 'Profil' },
@@ -21,6 +23,10 @@ export default function DashboardLayout({
     { href: '/dashboard/security', icon: Shield, label: 'Securité' },
     { href: '/dashboard/description', icon: ClipboardPenLine, label: 'Description' },
   ];
+
+  useEffect(() => {
+    refreshUser();
+  }, [])
 
   return (
     <div className="flex flex-col min-h-[calc(100dvh-68px)] max-w-7xl mx-auto w-full">
