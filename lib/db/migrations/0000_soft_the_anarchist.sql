@@ -1,6 +1,5 @@
 CREATE TABLE IF NOT EXISTS "activity_logs" (
 	"id" serial PRIMARY KEY NOT NULL,
-	"team_id" integer NOT NULL,
 	"user_id" integer,
 	"action" text NOT NULL,
 	"timestamp" timestamp DEFAULT now() NOT NULL,
